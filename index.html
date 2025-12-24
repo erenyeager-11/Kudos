@@ -41,9 +41,7 @@
     transition: all 0.3s;
   }
 
-  button:hover{
-    transform: scale(1.05);
-  }
+  button:hover{transform: scale(1.05);}
 
   .bulb{
     width:120px;
@@ -116,13 +114,14 @@
     letter-spacing:.5px;
   }
 
-  .cat-img{
-    width:160px;
+  .cat-img,
+  .baby-photo{
+    width:200px;
     height:auto;
-    margin:20px auto;
-    border-radius:16px;
-    box-shadow:0 0 15px rgba(255,255,255,0.3);
-    animation:catBounce 2s infinite alternate, fadeIn 1.5s forwards;
+    margin:15px auto;
+    border-radius:18px;
+    box-shadow:0 0 18px rgba(255,255,255,0.25);
+    animation:fadeIn 1.4s forwards, catBounce 2s infinite alternate;
     opacity:0;
   }
 
@@ -161,7 +160,7 @@
     No, but let it be ✨
   </p>
 
-  <audio id="song1" src="song1.mp3"></audio>
+  <audio id="song1" src="song1.mp3" loop></audio>
 </div>
 
 <!-- PAGE 3 -->
@@ -179,11 +178,32 @@
 <!-- PAGE 5 -->
 <div class="screen" id="s5">
   <div class="animated-text" id="lines2"></div>
-  <button onclick="go(6); showBabyInfo(); playSong2();">Next</button>
+  <button onclick="go(6)">Next</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- NEW PAGE 6 -->
 <div class="screen" id="s6">
+  <img src="cutecat.png" class="baby-photo" alt="Cute cat">
+  <div class="animated-text" id="p1"></div>
+  <button onclick="go(7)">Next</button>
+</div>
+
+<!-- NEW PAGE 7 -->
+<div class="screen" id="s7">
+  <img src="cutercat.png" class="baby-photo" alt="Cuter cat">
+  <div class="animated-text" id="p2"></div>
+  <button onclick="go(8)">Next</button>
+</div>
+
+<!-- NEW PAGE 8 -->
+<div class="screen" id="s8">
+  <img src="cutiestcat.png" class="baby-photo" alt="Cutiest cat">
+  <div class="animated-text" id="p3"></div>
+  <button onclick="go(9); showBabyInfo(); playSong2();">Next</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="screen" id="s9">
   <div class="moon">🌙</div>
   <div class="animated-text" id="babyInfo"></div>
   <div class="sign">– AYAN</div>
@@ -265,6 +285,58 @@ function showLines2(){
   });
 }
 
+/* -------- NEW 3 PAGES TEXT -------- */
+
+function fillPage(elId, lines){
+  const box = document.getElementById(elId);
+  box.innerHTML="";
+  lines.forEach((t,i)=>{
+    const span = document.createElement("span");
+    span.style.animationDelay = (0.45*i)+"s";
+    span.innerText = t;
+    box.appendChild(span);
+  });
+}
+
+fillPage("p1", [
+  "A tiny star has entered the world ✨",
+  "So soft, so pure, so full of love.",
+  "Every new breath feels like a blessing.",
+  "God has gifted a precious smile today.",
+  "Little hands, tiny dreams, bright future.",
+  "May this child always stay safe and happy.",
+  "May kindness live in his heart forever.",
+  "Your home now carries beautiful prayers.",
+  "May tears turn into laughter always.",
+  "Congratulations on this sweet miracle 🤍"
+]);
+
+fillPage("p2", [
+  "A baby is the beginning of endless love.",
+  "His laughter will light up every corner.",
+  "May every day bring peaceful sleep and joy.",
+  "May he grow strong, brave and gentle.",
+  "Your family’s happiness just doubled.",
+  "Blessings are wrapped in this tiny bundle.",
+  "Every hug will feel like heaven.",
+  "Cherish every second — they become memories.",
+  "May Allah keep him smiling always.",
+  "Warm congratulations to the whole family 🌼"
+]);
+
+fillPage("p3", [
+  "Another sweet moment to thank God.",
+  "Hearts feel lighter when a baby arrives.",
+  "The world looks softer and brighter now.",
+  "May his life be full of love and wisdom.",
+  "His giggles will make every day special.",
+  "May blessings surround him wherever he goes.",
+  "Your home is now richer with joy.",
+  "May peace stay forever within these walls.",
+  "Lots of prayers, love and warm wishes.",
+  "Welcome, little angel — shine always ✨"
+]);
+
 function showBabyInfo(){
   const info = [
     "Congratulations on the arrival of your baby boy!",
@@ -283,7 +355,6 @@ function showBabyInfo(){
   });
 }
 
-// Stop song1 and play song2
 function playSong2(){
   if(!song2) return;
   song1.pause();
@@ -294,4 +365,3 @@ function playSong2(){
 
 </body>
 </html>
-

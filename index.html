@@ -38,6 +38,11 @@
     font-weight:600;
     cursor:pointer;
     margin-top:18px;
+    transition: all 0.3s;
+  }
+
+  button:hover{
+    transform: scale(1.05);
   }
 
   .bulb{
@@ -47,42 +52,54 @@
     margin:25px auto;
     background:#222;
     box-shadow:0 0 0px #ffd85e;
-    transition:.45s;
+    transition:.8s ease-in-out;
   }
 
   .glow{
     background:#ffd85e;
-    box-shadow:0 0 45px #ffd85e;
+    box-shadow:0 0 60px #ffd85e, 0 0 80px #ffd85e;
+    animation:bulbPulse 2s infinite alternate;
+  }
+
+  @keyframes bulbPulse{
+    0%{box-shadow:0 0 20px #ffd85e;}
+    100%{box-shadow:0 0 60px #ffd85e, 0 0 80px #ffd85e;}
   }
 
   .animated-text span{
     opacity:0;
     display:block;
     margin:6px 0;
-    animation:fade 1s forwards;
+    animation:fadeUp 1s forwards;
   }
 
-  @keyframes fade{
-    from{opacity:0; transform:translateY(6px);}
-    to{opacity:1; transform:translateY(0);}
+  @keyframes fadeUp{
+    0%{opacity:0; transform:translateY(10px);}
+    100%{opacity:1; transform:translateY(0);}
   }
 
   .heart{
-    font-size:130px; /* heart size increased */
+    font-size:130px;
     cursor:pointer;
-    animation:pulse 1.6s infinite;
+    animation:pulseHeart 2s infinite;
   }
 
-  @keyframes pulse{
+  @keyframes pulseHeart{
     0%{transform:scale(1);}
-    50%{transform:scale(1.15);}
+    50%{transform:scale(1.1);}
     100%{transform:scale(1);}
   }
 
   .moon{
     font-size:95px;
-    animation:fadeIn 2.2s forwards;
+    opacity:0;
+    animation:moonFade 2.5s forwards;
     margin-bottom:6px;
+  }
+
+  @keyframes moonFade{
+    0%{opacity:0; transform:scale(0.8);}
+    100%{opacity:1; transform:scale(1);}
   }
 
   .soft-note{
@@ -145,9 +162,7 @@
 <!-- PAGE 6 -->
 <div class="screen" id="s6">
   <div class="moon">🌙</div>
-
   <div class="animated-text" id="babyInfo"></div>
-
   <div class="sign">– AYAN</div>
 </div>
 
@@ -196,7 +211,7 @@ function showLines1(){
   box.innerHTML="";
   text.forEach((t,i)=>{
     const span=document.createElement("span");
-    span.style.animationDelay = (0.4*i)+"s";
+    span.style.animationDelay = (0.5*i)+"s";
     span.innerText=t;
     box.appendChild(span);
   });
@@ -219,7 +234,7 @@ function showLines2(){
   box.innerHTML="";
   text.forEach((t,i)=>{
     const span=document.createElement("span");
-    span.style.animationDelay = (0.35*i)+"s";
+    span.style.animationDelay = (0.5*i)+"s";
     span.innerText=t;
     box.appendChild(span);
   });
@@ -227,8 +242,8 @@ function showLines2(){
 
 function showBabyInfo(){
   const info = [
-    "Congratulations on the arrival of your baby boy!"
-    "🌟 A little bundle of joy has entered your home, bringing happiness, love, and laughter. May he grow up healthy, strong, and full of smiles that light up everyone’s hearts."
+    "Congratulations on the arrival of your baby boy!",
+    "🌟 A little bundle of joy has entered your home, bringing happiness, love, and laughter. May he grow up healthy, strong, and full of smiles that light up everyone’s hearts.",
     "May his tiny steps lead to big dreams, and may every moment with him be filled with endless love and warmth. Welcome to the world, little prince! ✨"
   ];
 
@@ -237,7 +252,7 @@ function showBabyInfo(){
 
   info.forEach((t,i)=>{
     const span = document.createElement("span");
-    span.style.animationDelay = (0.45*i)+"s";
+    span.style.animationDelay = (0.55*i)+"s";
     span.innerText = t;
     box.appendChild(span);
   });
@@ -246,6 +261,3 @@ function showBabyInfo(){
 
 </body>
 </html>
-
-
-

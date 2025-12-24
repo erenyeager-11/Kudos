@@ -181,21 +181,21 @@
   <button onclick="go(6)">Next</button>
 </div>
 
-<!-- NEW PAGE 6 -->
+<!-- PAGE 6 -->
 <div class="screen" id="s6">
   <img src="cutecat.png" class="baby-photo" alt="Cute cat">
   <div class="animated-text" id="p1"></div>
   <button onclick="go(7)">Next</button>
 </div>
 
-<!-- NEW PAGE 7 -->
+<!-- PAGE 7 -->
 <div class="screen" id="s7">
   <img src="cutercat.png" class="baby-photo" alt="Cuter cat">
   <div class="animated-text" id="p2"></div>
   <button onclick="go(8)">Next</button>
 </div>
 
-<!-- NEW PAGE 8 -->
+<!-- PAGE 8 -->
 <div class="screen" id="s8">
   <img src="cutiestcat.png" class="baby-photo" alt="Cutiest cat">
   <div class="animated-text" id="p3"></div>
@@ -204,6 +204,7 @@
 
 <!-- FINAL PAGE -->
 <div class="screen" id="s9">
+  <img src="thecat.png" class="baby-photo" alt="Final cat">
   <div class="moon">🌙</div>
   <div class="animated-text" id="babyInfo"></div>
   <div class="sign">– AYAN</div>
@@ -285,8 +286,6 @@ function showLines2(){
   });
 }
 
-/* -------- NEW 3 PAGES TEXT -------- */
-
 function fillPage(elId, lines){
   const box = document.getElementById(elId);
   box.innerHTML="";
@@ -340,8 +339,8 @@ fillPage("p3", [
 function showBabyInfo(){
   const info = [
     "Congratulations on the arrival of your baby boy!",
-    "🌟 A little bundle of joy has entered your home, bringing happiness, love, and laughter. May he grow up healthy, strong, and full of smiles that light up everyone’s hearts.",
-    "May his tiny steps lead to big dreams, and may every moment with him be filled with endless love and warmth. Welcome to the world, little prince! ✨"
+    "🌟 A little bundle of joy has entered your home, bringing happiness, love, and laughter.",
+    "May he grow up healthy, strong, and full of smiles that light up everyone’s hearts. ✨"
   ];
 
   const box = document.getElementById("babyInfo");
@@ -356,7 +355,6 @@ function showBabyInfo(){
 }
 
 function playSong2(){
-  if(!song2) return;
   song1.pause();
   song2.currentTime = 0;
   song2.play();
@@ -365,3 +363,4 @@ function playSong2(){
 
 </body>
 </html>
+

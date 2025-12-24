@@ -115,6 +115,28 @@
     font-style:italic;
     letter-spacing:.5px;
   }
+
+  /* Cat image animation */
+  .cat-img{
+    width:160px;
+    height:auto;
+    margin:20px auto;
+    border-radius:16px;
+    box-shadow:0 0 15px rgba(255,255,255,0.3);
+    animation:catBounce 2s infinite alternate, fadeIn 1.5s forwards;
+    opacity:0;
+  }
+
+  @keyframes catBounce{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-10px);}
+  }
+
+  @keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+
 </style>
 </head>
 
@@ -131,6 +153,9 @@
 <!-- PAGE 2 -->
 <div class="screen" id="s2">
   <h3>Play a song first? 🎵</h3>
+
+  <img src="https://i.imgur.com/Jh4JpHg.png" alt="Cute cat" class="cat-img" />
+
   <button onclick="playSong1()">Yes</button>
   <button onclick="skipSong()">No</button>
 
@@ -261,4 +286,3 @@ function showBabyInfo(){
 
 </body>
 </html>
-

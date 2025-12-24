@@ -19,24 +19,6 @@
     position:relative;
   }
 
-  /* animated floating hearts */
-  .heart-bg{
-    position:absolute;
-    width:30px;
-    height:30px;
-    background:red;
-    clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 85% 30%, 85% 45%, 75% 60%, 50% 85%, 25% 60%, 15% 45%, 15% 30%, 25% 15%, 39% 15%);
-    opacity:0.7;
-    animation: float 12s linear infinite;
-    pointer-events:none;
-  }
-
-  @keyframes float{
-    0%{transform: translateY(100vh) scale(0.5); opacity:0.3;}
-    50%{opacity:0.7;}
-    100%{transform: translateY(-50vh) scale(1); opacity:0;}
-  }
-
   .screen{
     display:none;
     text-align:center;
@@ -85,6 +67,18 @@
     to{opacity:1; transform:translateY(0);}
   }
 
+  .heart{
+    font-size:130px; /* heart size increased */
+    cursor:pointer;
+    animation:pulse 1.6s infinite;
+  }
+
+  @keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+    100%{transform:scale(1);}
+  }
+
   .moon{
     font-size:95px;
     animation:fadeIn 2.2s forwards;
@@ -108,18 +102,6 @@
 </head>
 
 <body>
-
-<!-- generate hearts background -->
-<script>
-for(let i=0;i<15;i++){
-  let heart = document.createElement("div");
-  heart.classList.add("heart-bg");
-  heart.style.left = Math.random()*100+"vw";
-  heart.style.animationDuration = (8+Math.random()*6)+"s";
-  heart.style.width = heart.style.height = (20+Math.random()*20)+"px";
-  document.body.appendChild(heart);
-}
-</script>
 
 <!-- PAGE 1 -->
 <div class="screen show" id="s1">
@@ -245,7 +227,7 @@ function showLines2(){
 
 function showBabyInfo(){
   const info = [
-    "🎉 Congratulations! A baby boy has arrived 💖",
+    "🎉 Congratulations! A baby boy has arrived 💖", 
     "May your family be filled with love, joy, and endless blessings ✨"
   ];
 
@@ -263,4 +245,5 @@ function showBabyInfo(){
 
 </body>
 </html>
+
 

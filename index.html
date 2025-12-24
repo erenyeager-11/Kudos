@@ -116,7 +116,6 @@
     letter-spacing:.5px;
   }
 
-  /* Cat image animation */
   .cat-img{
     width:160px;
     height:auto;
@@ -136,7 +135,6 @@
     from{opacity:0;}
     to{opacity:1;}
   }
-
 </style>
 </head>
 
@@ -154,7 +152,7 @@
 <div class="screen" id="s2">
   <h3>Play a song first? 🎵</h3>
 
-  <img src="https://i.imgur.com/Jh4JpHg.png" alt="Cute cat" class="cat-img" />
+  <img src="cat.png" alt="Cute cat" class="cat-img" />
 
   <button onclick="playSong1()">Yes</button>
   <button onclick="skipSong()">No</button>
@@ -181,7 +179,7 @@
 <!-- PAGE 5 -->
 <div class="screen" id="s5">
   <div class="animated-text" id="lines2"></div>
-  <button onclick="go(6); showBabyInfo();">Next</button>
+  <button onclick="go(6); showBabyInfo(); playSong2();">Next</button>
 </div>
 
 <!-- PAGE 6 -->
@@ -189,10 +187,12 @@
   <div class="moon">🌙</div>
   <div class="animated-text" id="babyInfo"></div>
   <div class="sign">– AYAN</div>
+  <audio id="song2" src="song2.mp3"></audio>
 </div>
 
 <script>
 let song1 = document.getElementById("song1");
+let song2 = document.getElementById("song2");
 
 function go(n){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
@@ -282,7 +282,16 @@ function showBabyInfo(){
     box.appendChild(span);
   });
 }
+
+// Stop song1 and play song2
+function playSong2(){
+  if(!song2) return;
+  song1.pause();
+  song2.currentTime = 0;
+  song2.play();
+}
 </script>
 
 </body>
 </html>
+

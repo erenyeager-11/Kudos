@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Baby Congratulations</title>
+
+<style>
+  body{
+    margin:0;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle at top , #1d2233, #0a0c12);
+    color:white;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    position:relative;
+  }
+
+  /* animated floating hearts */
+  .heart-bg{
+    position:absolute;
+    width:30px;
+    height:30px;
+    background:red;
+    clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 85% 30%, 85% 45%, 75% 60%, 50% 85%, 25% 60%, 15% 45%, 15% 30%, 25% 15%, 39% 15%);
+    opacity:0.7;
+    animation: float 12s linear infinite;
+    pointer-events:none;
+  }
+
+  @keyframes float{
+    0%{transform: translateY(100vh) scale(0.5); opacity:0.3;}
+    50%{opacity:0.7;}
+    100%{transform: translateY(-50vh) scale(1); opacity:0;}
+  }
+
+  .screen{
+    display:none;
+    text-align:center;
+    width:90%;
+    max-width:450px;
+    z-index:2;
+  }
+
+  .show{display:block;}
+
+  button{
+    background:#fff;
+    color:#0f0f14;
+    border:none;
+    padding:10px 18px;
+    border-radius:14px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:18px;
+  }
+
+  .bulb{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    margin:25px auto;
+    background:#222;
+    box-shadow:0 0 0px #ffd85e;
+    transition:.45s;
+  }
+
+  .glow{
+    background:#ffd85e;
+    box-shadow:0 0 45px #ffd85e;
+  }
+
+  .animated-text span{
+    opacity:0;
+    display:block;
+    margin:6px 0;
+    animation:fade 1s forwards;
+  }
+
+  @keyframes fade{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .moon{
+    font-size:95px;
+    animation:fadeIn 2.2s forwards;
+    margin-bottom:6px;
+  }
+
+  .soft-note{
+    margin-top:10px;
+    font-size:14px;
+    opacity:.9;
+    font-style:italic;
+  }
+
+  .sign{
+    margin-top:18px;
+    opacity:.9;
+    font-style:italic;
+    letter-spacing:.5px;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- generate hearts background -->
+<script>
+for(let i=0;i<15;i++){
+  let heart = document.createElement("div");
+  heart.classList.add("heart-bg");
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.animationDuration = (8+Math.random()*6)+"s";
+  heart.style.width = heart.style.height = (20+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+}
+</script>
+
+<!-- PAGE 1 -->
+<div class="screen show" id="s1">
+  <p>Tap the button gently 🫧</p>
+  <button onclick="glowBulb()">TAP</button>
+  <div class="bulb" id="bulb"></div>
+  <button id="next1" style="display:none" onclick="go(2)">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="screen" id="s2">
+  <h3>Play a song first? 🎵</h3>
+  <button onclick="playSong1()">Yes</button>
+  <button onclick="skipSong()">No</button>
+
+  <p id="noline" class="soft-note" style="display:none;">
+    No, but let it be ✨
+  </p>
+
+  <audio id="song1" src="song1.mp3"></audio>
+</div>
+
+<!-- PAGE 3 -->
+<div class="screen" id="s3">
+  <div class="animated-text" id="lines1"></div>
+  <button onclick="go(4)">Next</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="screen" id="s4">
+  <p>Tap the heart 💗</p>
+  <div class="heart" onclick="heartTap()">❤️</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="screen" id="s5">
+  <div class="animated-text" id="lines2"></div>
+  <button onclick="go(6); showBabyInfo();">Next</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="screen" id="s6">
+  <div class="moon">🌙</div>
+
+  <div class="animated-text" id="babyInfo"></div>
+
+  <div class="sign">– AYAN</div>
+</div>
+
+<script>
+let song1 = document.getElementById("song1");
+
+function go(n){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+  document.getElementById("s"+n).classList.add("show");
+}
+
+function glowBulb(){
+  document.getElementById("bulb").classList.add("glow");
+  document.getElementById("next1").style.display="inline-block";
+}
+
+function playSong1(){
+  song1.currentTime = 0;
+  song1.play();
+  showLines1();
+  go(3);
+}
+
+function skipSong(){
+  const line = document.getElementById("noline");
+  line.style.display = "block";
+
+  song1.currentTime = 0;
+  song1.play();
+
+  setTimeout(()=>{
+    showLines1();
+    go(3);
+  }, 900);
+}
+
+function showLines1(){
+  const text = [
+    "Warm wishes to the family 🌸",
+    "A new life has brought joy and happiness.",
+    "May your home be filled with love and laughter.",
+    "Every little smile of the baby shines bright.",
+    "Celebrating this beautiful arrival together ✨"
+  ];
+  const box = document.getElementById("lines1");
+  box.innerHTML="";
+  text.forEach((t,i)=>{
+    const span=document.createElement("span");
+    span.style.animationDelay = (0.4*i)+"s";
+    span.innerText=t;
+    box.appendChild(span);
+  });
+}
+
+function heartTap(){
+  go(5);
+  showLines2();
+}
+
+function showLines2(){
+  const text = [
+    "Wishing the little one a healthy and happy life.",
+    "May Shalina Parveen and family be blessed always.",
+    "The home is now filled with smiles and love.",
+    "Sending love and congratulations to everyone.",
+    "This is a precious moment to cherish forever."
+  ];
+  const box = document.getElementById("lines2");
+  box.innerHTML="";
+  text.forEach((t,i)=>{
+    const span=document.createElement("span");
+    span.style.animationDelay = (0.35*i)+"s";
+    span.innerText=t;
+    box.appendChild(span);
+  });
+}
+
+function showBabyInfo(){
+  const info = [
+    "🎉 Congratulations! A baby boy has arrived 💖",
+    "Mother: Shalina Parveen",
+    "Date of Birth: 21 Dec 2025",
+    "Weight: 3.2 kg | Height: 50 cm",
+    "May your family be filled with love, joy, and endless blessings ✨"
+  ];
+
+  const box = document.getElementById("babyInfo");
+  box.innerHTML = "";
+
+  info.forEach((t,i)=>{
+    const span = document.createElement("span");
+    span.style.animationDelay = (0.45*i)+"s";
+    span.innerText = t;
+    box.appendChild(span);
+  });
+}
+</script>
+
+</body>
+</html>
